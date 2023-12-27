@@ -12,9 +12,9 @@ function App() {
     
     <div className="App">
       <Navi/>
-      <Container className='main'>
-     <Dashboard/>
-     </Container>
+      <Container className="main">
+        <Dashboard />
+      </Container>
     </div>
   );
 }
