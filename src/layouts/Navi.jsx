@@ -4,8 +4,10 @@ import CartSummary from './CartSummary'
 import SignedOut from './SignedOut'
 import SıgnedIn from './SıgnedIn'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 export default function Navi() {
+  const {cartItems} =  useSelector(state=>state.cart)
 
   const [isAuthenticated,setIsAuthenticated] = useState(false);
   
@@ -34,7 +36,9 @@ export default function Navi() {
         />
 
         <Menu.Menu position='right'>
-         <CartSummary/>
+         {cartItems.lenght>0&&<CartSummary/>}
+
+
           {isAuthenticated? <SıgnedIn signOut={handleSignOut} /> :  <SignedOut signIn={handleSignIn}/>}
          
           
