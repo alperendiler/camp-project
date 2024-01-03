@@ -1,14 +1,20 @@
 import React  , {useEffect, useState} from 'react'
-import { Icon, Label, Menu, Table } from 'semantic-ui-react'
+import { Icon,  Menu, Table } from 'semantic-ui-react'
 import ProductServices from '../Services/productService'
+import { Link } from 'react-router-dom'
 
 export default function ProductList() {
-const [products, setproducts] = useState([])
+const [products, setProducts] = useState([])
 
 useEffect(()=>{
-  let productService = new ProductServices();
-  productService.getProducts().then(result=>setproducts(result.data));   
-})
+  fetchProducts();
+},[])
+
+const fetchProducts = () => {
+  ProductServices.getProducts().then(response=> {
+    setProducts(response.data.products);
+  });
+};
 
   return (
     <div> <Table celled>
@@ -24,10 +30,10 @@ useEffect(()=>{
    
      {
         products.map(product=>(
-            <Table.Row >
-            <Table.Cell>{product.productName}</Table.Cell>
-            <Table.Cell>{product.unitsInStock}</Table.Cell>
-            <Table.Cell>{product.unitPrice}</Table.Cell>
+            <Table.Row key={product.id} >
+            <Table.Cell  ><Link to={"/products/" + product.id}>{product.title}</Link></Table.Cell>
+            <Table.Cell >{product.stock}</Table.Cell>
+            <Table.Cell >{product.price}</Table.Cell>
           </Table.Row>
         ))
      }
