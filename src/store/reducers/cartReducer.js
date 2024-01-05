@@ -3,7 +3,7 @@ import { cartItems } from "../initialValues/cartItems";
 
 const initialState = {
     cartItems: cartItems
-}
+};
 
 
 
@@ -13,14 +13,18 @@ export default function cartReducer(state = initialState ,{type, payload} ) {
             let product = state.cartItems.find(c=>c.product.id===payload.id)
             if(product)
             {
-                product.price++;
-                 return{
+                product.quantity++;
+                console.log('State güncellendi:', state);
+
+                return {
                     ...state
-                 }
+                };
             }else {
+                console.log('State güncellendi:', state);
+
                 return{
-                   ...state,
-                   cartItems:[...state.cartItems,{product:payload}]
+                  ...state,
+          cartItems: [...state.cartItems, { quantity: 1, product: payload }],
                 }
             }
             

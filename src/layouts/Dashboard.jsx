@@ -5,10 +5,13 @@ import { Grid, GridColumn, GridRow } from 'semantic-ui-react'
 import { Route, Routes } from 'react-router-dom'
 import ProductDetail from '../pages/ProductDetail'
 import CardDetail from '../pages/CartDetail'
+import { ToastContainer } from 'react-toastify'
+import ProductAdd from '../pages/ProductAdd'
 
 export default function Dashboard() {
   return (
     <div>
+      <ToastContainer position='bottom-right' />
       <Grid>
         <GridRow>
           <GridColumn width={4}>
@@ -20,6 +23,7 @@ export default function Dashboard() {
           <Route  path={"/products"} element={<ProductList/>} />
           <Route path={"/products/:id"} element={<ProductDetail/>} />
           <Route path={"/cartDetail"} element={<CardDetail/>} />
+          <Route path={"/product/add"} element={<ProductAdd/>} />
 
           </Routes>
         </GridColumn>

@@ -36,7 +36,7 @@ export default function Navi() {
         />
 
         <Menu.Menu position='right'>
-         {cartItems.lenght>0&&<CartSummary/>}
+         {cartItems.length >0 && <CartSummary/>}
 
 
           {isAuthenticated? <SıgnedIn signOut={handleSignOut} /> :  <SignedOut signIn={handleSignIn}/>}

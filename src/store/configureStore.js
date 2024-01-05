@@ -1,14 +1,18 @@
-import { createStore, applyMiddleware } from "redux";
-import rootReducer from "./rootReducer";
-import { composeWithDevTools } from "@redux-devtools/extension";
+import { createStore, applyMiddleware, compose } from 'redux';
+import rootReducer from './rootReducer';
+import logger from 'redux-logger';
 
 export function configureStore() {
-  const middleware = []; // Özel middleware'leri buraya ekleyin
-  const enhancer = composeWithDevTools(applyMiddleware(...middleware));
-  const store = createStore(rootReducer, enhancer);
+  const middleware = [logger];
 
-  // Özel store düzenlemelerini buraya ekleyebilirsiniz
-  // Örnek: store.dispatch, store.getState gibi fonksiyonlar üzerinde değişiklik yapabilirsiniz.
+  const composeEnhancers =
+    process.env.NODE_ENV === 'development'
+      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+      : compose;
+
+  const enhancer = composeEnhancers(applyMiddleware(...middleware));
+
+  const store = createStore(rootReducer, enhancer);
 
   return store;
 }
